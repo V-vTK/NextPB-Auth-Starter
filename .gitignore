@@ -1,1 +1,9 @@
+# Pocketbase database files
 /pocketbase/pb_data
+
+# Exclude local environment files
+.vscode/
+
+# Ignore Python temp files
+*__pycache__/
+.pytest_cache/
