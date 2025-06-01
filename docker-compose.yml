@@ -1,23 +1,23 @@
 services:
   pocketbase:
     image: ghcr.io/muchobien/pocketbase:latest
-    container_name: pocketbase
+    container_name: next-pocketbase
     restart: unless-stopped
     ports:
-      - "8093:8090"
+      - "8096:8090"
     volumes:  # For CI/CD data persistence use either named volumes or absolute bind mounts.
       - ./pocketbase/pb_data:/pb_data
       - ./pocketbase/pb_pubdata:/pb_public
       - ./pocketbase/pb_hooks:/pb_hooks
     # volumes:
     #   - type: bind
-    #     source: /mnt/ssd_pool/desktop/backups/TrackAppData/pb_data
+    #     source: /mnt/ssd_pool/backups/next_app_data/pb_data
     #     target: /pb_data
     #   - type: bind
-    #     source: /mnt/ssd_pool/desktop/backups/TrackAppData/pb_public
+    #     source: /mnt/ssd_pool/backups/next_app_data/pb_public
     #     target: /pb_public
     #   - type: bind
-    #     source: /mnt/ssd_pool/desktop/backups/TrackAppData/pb_hooks
+    #     source: /mnt/ssd_pool/backups/next_app_data/pb_hooks
     #     target: /pb_hooks
     healthcheck: 
       test: wget --no-verbose --tries=1 --spider http://localhost:8090/api/health || exit 1
@@ -28,17 +28,17 @@ services:
       - app_network
 
   frontend:
-    container_name: frontend
+    container_name: next-frontend
     build:
       context: ./frontend
       dockerfile: dockerfile
     ports:
-      - "3003:3000"
+      - "3006:3000"
     networks:
       - app_network
 
   test-automation:
-    container_name: test-automation
+    container_name: next-test-automation
     build:
       context: ./testAutomation
       dockerfile: dockerfile

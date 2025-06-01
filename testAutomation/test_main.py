@@ -29,11 +29,11 @@ class App:
     def resolve_urls(self):
         is_deployment_docker = os.getenv('deployment', None)
         if is_deployment_docker is not None:  # use Docker DNS resolver
-            self.pocketbase_url = "http://pocketbase:8090"
-            self.frontend_url = "http://frontend:3000"
+            self.pocketbase_url = "http://next-pocketbase:8090"
+            self.frontend_url = "http://next-frontend:3000"
         else:
-            self.pocketbase_url = "http://localhost:8093"
-            self.frontend_url = "http://localhost:3003"
+            self.pocketbase_url = "http://localhost:8096"
+            self.frontend_url = "http://localhost:3006"
 
     def wait_serices_up(self):
         print("Wait until services up")
@@ -44,7 +44,7 @@ class App:
                 try:
                     response = requests.get(service, timeout=self.timeout)
                     if response.status_code == 200:
-                        print("service is healthy")
+                        print(f"service: {service} is healthy")
                         break
                     else:
                         print(f"Retry... {attempt}. Service: {service} returned code: {response.status_code}")
@@ -54,6 +54,7 @@ class App:
                     time.sleep(5)
             else:
                 print(f"Service {service} is not up after {attempts} attempts")
+                raise Exception(f"Service {service} is not up after {attempts} attempts")
         print("Services up...")
 
 

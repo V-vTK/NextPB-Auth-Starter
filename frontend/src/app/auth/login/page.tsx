@@ -10,8 +10,16 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { useLoadingStore } from "@/app/(secure)/zustand";
 
+export default function SuspenseWrapper() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginPage />
+    </Suspense>
+  );
+}
+
 // https://blog.mahad.dev/setting-up-nextjs-and-pocketbase-for-authentication
-export default function LoginPage() {
+function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { setLoading } = useLoadingStore();
@@ -63,7 +71,6 @@ export default function LoginPage() {
   };
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
     <div className="flex justify-center">
       <div className="flex-col">
         <h1 className="py-2 mt-4 text-xl font-semibold">Login</h1>
@@ -112,6 +119,5 @@ export default function LoginPage() {
         </Card>
       </div>
     </div>
-    </Suspense>
   );
 }
