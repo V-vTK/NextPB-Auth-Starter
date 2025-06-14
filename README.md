@@ -9,3 +9,4 @@ A full-stack starter template using Next.js, PocketBase, Tailwind CSS, and ShadC
 
 
 ## Notes
+test CI/CD
