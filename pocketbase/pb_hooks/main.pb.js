@@ -2,7 +2,7 @@
 START UP
 ########################################################*/
 onBootstrap((e) => {
-    console.log('App initialized2!')
+    console.log('App initialized!')
     e.next()
 })
 

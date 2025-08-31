@@ -62,7 +62,7 @@ export default function SignUpPage() {
         <Card className="border-2 p-8 rounded-lg dark:border-muted border-gray-300">
           <form onSubmit={onSubmit} className="flex max-w-md flex-col gap-4">
             <div>
-              <Label htmlFor="email">Email</Label>
+              <Label className="mb-1" htmlFor="email">Email</Label>
               <Input
                 id="email"
                 type="email"
@@ -74,7 +74,7 @@ export default function SignUpPage() {
             </div>
 
             <div>
-              <Label htmlFor="username">Username</Label>
+              <Label className="mb-1" htmlFor="username">Username</Label>
               <Input
                 id="username"
                 type="text"
@@ -85,7 +85,7 @@ export default function SignUpPage() {
             </div>
 
             <div>
-              <Label htmlFor="password">Password</Label>
+              <Label className="mb-1" htmlFor="password">Password</Label>
               <Input
                 id="password"
                 type="password"
@@ -103,7 +103,7 @@ export default function SignUpPage() {
             </div>
 
             <Button
-              className="border-2 rounded-md border-gray-300 dark:border-muted px-1"
+              className="border-2 rounded-md border-gray-300 dark:border-muted px-1 text-white"
               type="submit"
               id="submit"
             >

@@ -77,7 +77,7 @@ function LoginPage() {
         <Card className="border-2 p-8 rounded-lg dark:border-muted border-gray-300">
           <form onSubmit={handleSubmit} className="flex max-w-md flex-col gap-4">
             <div>
-              <Label htmlFor="email">Email</Label>
+              <Label className="mb-1" htmlFor="email">Email</Label>
               <Input
                 id="email"
                 type="email"
@@ -88,7 +88,7 @@ function LoginPage() {
               />
             </div>
             <div>
-              <Label htmlFor="password">Password</Label>
+              <Label className="mb-1" htmlFor="password">Password</Label>
               <Input
                 id="password"
                 type="password"
@@ -109,7 +109,7 @@ function LoginPage() {
             </div>
 
             <Button
-              className="border-2 rounded-md border-gray-300 dark:border-muted px-1"
+              className="border-2 rounded-md border-gray-300 dark:border-muted px-1 text-white"
               type="submit"
               id="submit"
             >

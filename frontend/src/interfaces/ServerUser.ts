@@ -12,3 +12,18 @@ export interface ServerUser {
     verified: boolean,
     token: string,
 }
+
+export const emptyServerUser: ServerUser = {
+    id: "",
+    email: "",
+    avatar: undefined,
+    collectionId: "",
+    collectionName: "",
+    created: "",
+    emailVisibility: false,
+    name: "",
+    updated: "",
+    username: "",
+    verified: false,
+    token: ""
+};
