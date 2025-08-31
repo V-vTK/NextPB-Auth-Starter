@@ -5,11 +5,17 @@ A full-stack starter template using Next.js, PocketBase, Tailwind CSS, and ShadC
 ## Features
 
 🔐 Authentication – Built-in user authentication with PocketBase, ready to handle login, signup, and session management.
+
 ↔️ Auth Forwarding – Seamless authentication flow with authentication redirects using NextJS middleware.
+
 🛡️ Row-Level Security (RLS) – Implemented Pocketbase API Rules
+
 📦 Containerization – Docker-ready setup for easy local development, testing, and production deployment.
+
 ⚙️ CI/CD Ready – Out-of-the-box pipelines (Jenkins / DinD-Jenkins) to automate building, testing, and deploying your app with GH hooks.
+
 🎨 Clean starting layout with Tailwind CSS and ShadCN with example app router and API route usage.
+
 
 ## Setup and usage
 
