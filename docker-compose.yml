@@ -5,20 +5,20 @@ services:
     restart: unless-stopped
     ports:
       - "8096:8090"
-    volumes:  # For CI/CD data persistence use either named volumes or absolute bind mounts.
-      - ./pocketbase/pb_data:/pb_data
-      - ./pocketbase/pb_pubdata:/pb_public
-      - ./pocketbase/pb_hooks:/pb_hooks
-    # volumes:
-    #   - type: bind
-    #     source: /mnt/ssd_pool/backups/next_app_data/pb_data
-    #     target: /pb_data
-    #   - type: bind
-    #     source: /mnt/ssd_pool/backups/next_app_data/pb_public
-    #     target: /pb_public
-    #   - type: bind
-    #     source: /mnt/ssd_pool/backups/next_app_data/pb_hooks
-    #     target: /pb_hooks
+    # volumes:  # For CI/CD data persistence use either named volumes or absolute bind mounts.
+    #   - ./pocketbase/pb_data:/pb_data
+    #   - ./pocketbase/pb_pubdata:/pb_public
+    #   - ./pocketbase/pb_hooks:/pb_hooks
+    volumes:
+      - type: bind
+        source: /mnt/ssd_pool/backups/next_app_data/pb_data
+        target: /pb_data
+      - type: bind
+        source: /mnt/ssd_pool/backups/next_app_data/pb_public
+        target: /pb_public
+      - type: bind
+        source: /mnt/ssd_pool/backups/next_app_data/pb_hooks
+        target: /pb_hooks
     healthcheck: 
       test: wget --no-verbose --tries=1 --spider http://localhost:8090/api/health || exit 1
       interval: 5s
