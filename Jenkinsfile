@@ -3,6 +3,8 @@ pipeline {
 
     environment {
         deployment = "CI/CD-docker"
+        // Add Jenkins Credentials
+        // SECRET_API_KEY = credentials('c6ac2bae-6e11-4542-8a65-eec34d21e967')
     }
 
     stages {
@@ -32,6 +34,12 @@ pipeline {
                             cd NextPB-Auth-Starter
                             ls -a
                         '''
+
+                        // Inject additional environment variables
+                        sh """
+                            cd NextPB-Auth-Starter/frontend
+                            # echo 'NEXT_SECRET_API_KEY="${SECRET_API_KEY}"' >> .env
+                        """
                     } catch (Exception e) {
                         echo "Error occurred while creating the environment: ${e.getMessage()}"
                         echo "Failed to display the environment"
@@ -44,10 +52,12 @@ pipeline {
             steps {
                 script {
                     try {
-                        // Only launch pocketbase and frontend services (by service name not container name)
+                        // Launch frontend services and pocketbase with injected hooks (by service name not container name)
                         sh '''
                             cd NextPB-Auth-Starter
                             docker compose up -d --build pocketbase frontend
+                            echo "Copying newest hooks to volume..."
+                            docker cp pocketbase/pb_hooks/. $(docker compose ps -q pocketbase):/pb_hooks/
                         '''
                     } catch (Exception e) {
                         echo "Error occurred while running docker-compose: ${e.getMessage()}"
