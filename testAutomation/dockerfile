@@ -1,21 +1,22 @@
 # https://dev.to/victordalet/selenium-python-and-docker-2852 Modified to optimize layer building and caching
 FROM python:3.10
 
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-RUN apt-get -y update
-RUN apt-get install -y chromium
+RUN apt-get update && apt-get install -y wget gnupg curl unzip
 
-# install chromedriver
-RUN apt-get install -yqq unzip
-RUN wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`/chromedriver_linux64.zip
-RUN unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
+RUN wget -q -O /usr/share/keyrings/google-linux-signing-key.gpg https://dl-ssl.google.com/linux/linux_signing_key.pub
+
+RUN echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-linux-signing-key.gpg] http://dl.google.com/linux/chrome/deb/ stable main" \
+    > /etc/apt/sources.list.d/google-chrome.list
+
+RUN apt-get update && apt-get install -y chromium
+
+RUN wget -O /tmp/chromedriver.zip "http://chromedriver.storage.googleapis.com/$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver_linux64.zip" \
+    && unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
+
 ENV DISPLAY=:99
-
 ENV deployment=CI/CD-docker
 
 COPY ../../requirements.txt .
-
 RUN pip install -r requirements.txt
 
 COPY ../.. .
