@@ -49,5 +49,4 @@ Option 3: (Test production build)
 
 Pocketbase docs: https://pocketbase.io/docs/
 
-
 NextJS docs: https://nextjs.org/docs
